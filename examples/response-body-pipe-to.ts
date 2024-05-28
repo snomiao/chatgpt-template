@@ -1,38 +1,4 @@
-# GPT Template
-
-use ChatGPT in JS Template Style
-
-## Get Started
-
-1. Setup your env.OPENAI_API_KEY into your .env file
-2. Try following code:
-
-### Get full text once:
-
-```ts
 import { gpt } from "chatgpt-template";
-console.log(await gpt`Hello, world`.text()); // greetings
-```
-
-### Return as Streaming Response
-
-```ts
-import { gpt } from "chatgpt-template";
-import DIE from "@snomiao/die";
-
-export const GET = async (req: NextRequest) =>
-  await gpt`
-You are an AI flash card making assistant, please make flash cards for new words in given articles or note-lists, give me a csv with head Front,Back, which Front is Japanese word, and Back is "振仮名 of the Japanese world...<br />(English Translation...)"
-Here is my input:
-
-${req.nextUrl.searchParams.get("q") ?? DIE("Missing Query")}
-`; // new Response( ... token ... stream ... )
-```
-
-### Streaming to console:
-
-```ts
-import {gpt} from 'chatgpt-template'
 await gpt`
 You are an AI flash card making assistant, please make flash cards for new words in given articles or note-lists, give me a csv with head Front,Back, which Front is Japanese word, and Back is "振仮名 of the Japanese world...<br />(English Translation...)"
 Here is my input:
@@ -51,16 +17,12 @@ Here is my input:
 
 　子どもが感じている目のかゆみによる日常生活への影響について、44・2％の親がこのアンケートに答えるまで把握していなかった内容があったと答えており、一緒に暮らしていても花粉症の影響を把握できていない実態も浮き彫りとなった。【佐久間一輝】
 
-`.pipeTo(
-      new WritableStream({
-        write: (content) => {
-          console.write(content);
-        },
-      })
-    )
-  ; // write to console
-```
-
-## Reference
-
-Inspired by zx & bun shell
+`.then((e) =>
+  e.body!.pipeTo(
+    new WritableStream({
+      write: (content) => {
+        console.write(content);
+      },
+    })
+  )
+); // write to console

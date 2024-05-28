@@ -1,4 +1,6 @@
+// import TextEncoderStream from "polyfill-text-encoder-stream";
 import { ChatOpenAI } from "@langchain/openai";
+import TextEncoderStream from "polyfill-text-encoder-stream";
 export function gpt<V extends string | undefined>(
   s: TemplateStringsArray | string,
   ...v: V[]
@@ -20,7 +22,7 @@ export function gpt<V extends string | undefined>(
           ctrl.enqueue((chunk.content as string) ?? ""),
       })
     );
-    return Object.assign(new Response(stream), stream);
+    return new Response(stream);
   })();
   return Object.assign(promise, {
     abort: () => ac.abort(),
@@ -29,6 +31,11 @@ export function gpt<V extends string | undefined>(
     pipeTo: <R extends string>(
       destination: WritableStream<R>,
       options?: StreamPipeOptions
-    ) => promise.then((e) => stream.pipeTo(destination, options)),
+    ) =>
+      promise.then((e) =>
+        e
+          .body!.pipeThrough(new TextEncoderStream())
+          .pipeTo(destination, options)
+      ),
   });
 }
