@@ -2,7 +2,10 @@
 
 use ChatGPT in JS Template Style
 
-## Usage
+## Get Started
+
+1. Setup your env.OPENAI_API_KEY into your .env file
+2. Try following code:
 
 ### Get full text once:
 
