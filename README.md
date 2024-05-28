@@ -32,7 +32,7 @@ ${req.nextUrl.searchParams.get("q") ?? DIE("Missing Query")}
 ### Streaming to console:
 
 ```ts
-import {gpt} from 'chatgpt-template'
+import { gpt } from "chatgpt-template";
 await gpt`
 You are an AI flash card making assistant, please make flash cards for new words in given articles or note-lists, give me a csv with head Front,Back, which Front is Japanese word, and Back is "振仮名 of the Japanese world...<br />(English Translation...)"
 Here is my input:
@@ -52,14 +52,15 @@ Here is my input:
 　子どもが感じている目のかゆみによる日常生活への影響について、44・2％の親がこのアンケートに答えるまで把握していなかった内容があったと答えており、一緒に暮らしていても花粉症の影響を把握できていない実態も浮き彫りとなった。【佐久間一輝】
 
 `.pipeTo(
-      new WritableStream({
-        write: (content) => {
-          console.write(content);
-        },
-      })
-    )
-  ; // write to console
+  new WritableStream({
+    write: (content) => {
+      console.write(content);
+    },
+  })
+); // write to console
 ```
+
+### More [./examples HERE](./examples)
 
 ## Reference
 
