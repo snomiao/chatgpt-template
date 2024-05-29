@@ -77,7 +77,7 @@ const { level, notice } =  new vm.Script(code+ '; passwordValidate("Rue1DHuoP2De
 console.log({level, notice});
 
 ```
-### Return as Streaming Response
+### Return as Streaming Response (Next.js)
 
 ```ts
 import { gpt } from "chatgpt-template";
