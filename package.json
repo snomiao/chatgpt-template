@@ -3,10 +3,14 @@
     "@langchain/openai": "^0.0.34",
     "polyfill-text-encoder-stream": "^0.0.4"
   },
+  "description": "Talk to ChatGPT in JS TemplateString Style with Streaming Support",
   "name": "chatgpt-template",
   "keywords": [
     "gpt",
-    "chatgpt"
+    "chatgpt",
+    "typescript",
+    "node",
+    "bun"
   ],
   "module": "index.ts",
   "type": "module",

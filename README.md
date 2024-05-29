@@ -1,6 +1,6 @@
 # GPT Template
 
-use ChatGPT in JS Template Style
+Talk to ChatGPT in JS TemplateString Style with Streaming Support
 
 ## Get Started
 
