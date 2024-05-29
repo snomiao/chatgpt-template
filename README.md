@@ -14,6 +14,69 @@ import { gpt } from "chatgpt-template";
 console.log(await gpt`Hello, world`.text()); // greetings
 ```
 
+### Get json:
+
+```ts
+import { gpt } from "chatgpt-template";
+
+const obj = await gpt`
+You are an AI assistant that speak only plain JSON without codeblock fence.
+
+Now give me a json example about my dog.
+`.json();
+
+console.log(JSON.stringify(obj, null, 2));
+
+/*
+{
+  "dog": {
+    "name": "Buddy",
+    "breed": "Golden Retriever",
+    "age": 3,
+    "color": "Golden",
+    "weight": 70,
+    "vaccinated": true,
+    "favoriteToys": [
+      "rubber ball",
+      "tug rope",
+      "squeaky toy"
+    ],
+    "owner": {
+      "name": "John",
+      "contact": {
+        "phone": "123-456-7890",
+        "email": "john.doe@example.com"
+      }
+    }
+  }
+}
+ */
+```
+
+### Evaluate JS
+
+```ts
+import vm from "vm";
+import { gpt } from "chatgpt-template";
+
+const code = await gpt`
+You are an AI assistant that speak only JavaScript (and JSDOC) without codeblock fence.
+
+Now defined a function to validate password strength, level is from 1 to 5.
+
+function passwordValidate(password): {level, notice};
+
+Inputs: password
+Output: { level, notice }
+
+`.text();
+
+console.log(code);
+const context = vm.createContext();
+const { level, notice } =  new vm.Script(code+ '; passwordValidate("Rue1DHuoP2DeCP16")').runInContext(context);
+console.log({level, notice});
+
+```
 ### Return as Streaming Response
 
 ```ts

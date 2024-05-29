@@ -1,6 +1,5 @@
 import vm from "vm";
 import { gpt } from "..";
-import { build } from "bun";
 
 const code = await gpt`
 You are an AI assistant that speak only JavaScript (and JSDOC) without codeblock fence.
@@ -16,11 +15,10 @@ Output: { level, notice }
 
 console.log(code);
 const context = vm.createContext();
-
-const script =  new vm.Script(code+ ';globalThis.result=passwordValidate("Rue1DHuoP2DeCP16")').runInContext(context);
-console.log({ script });
-
-console.log({ context });
+const { level, notice } = new vm.Script(
+  code + '; passwordValidate("Rue1DHuoP2DeCP16")'
+).runInContext(context);
+console.log({ level, notice });
 
 // results:
 /*
@@ -55,22 +53,7 @@ function passwordValidate(password) {
     return { level, notice };
 }
 {
-  script: {
     level: 4,
     notice: "Password should contain at least one special character. ",
-    toString: [Function: toString],
-    toLocaleString: [Function: toLocaleString],
-    valueOf: [Function: valueOf],
-    hasOwnProperty: [Function: hasOwnProperty],
-    propertyIsEnumerable: [Function: propertyIsEnumerable],
-    isPrototypeOf: [Function: isPrototypeOf],
-    __defineGetter__: [Function: __defineGetter__],
-    __defineSetter__: [Function: __defineSetter__],
-    __lookupGetter__: [Function: __lookupGetter__],
-    __lookupSetter__: [Function: __lookupSetter__],
-  },
-}
-{
-  context: {},
 }
 */
