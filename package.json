@@ -20,7 +20,7 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "index.js",
   "types": "index.ts",
   "scripts": {
