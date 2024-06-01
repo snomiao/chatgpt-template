@@ -13,7 +13,7 @@
     "node",
     "bun"
   ],
-  "module": "index.ts",
+  "module": "index.js",
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest"
@@ -21,7 +21,7 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "types": "index.ts",
   "scripts": {
@@ -29,5 +29,8 @@
   },
   "workspaces": [
     "examples"
-  ]
+  ],
+  "exports": {
+    "import": "./index.js"
+  }
 }
