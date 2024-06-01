@@ -1,10 +1,6 @@
 {
   "name": "chatgpt-template",
-  "dependencies": {
-    "@langchain/openai": "^0.0.34",
-    "polyfill-text-encoder-stream": "^0.0.4",
-    "zx": "^8.1.2"
-  },
+  "version": "1.1.0",
   "description": "Talk to ChatGPT in JS TemplateString Style with Streaming Support",
   "keywords": [
     "gpt",
@@ -13,24 +9,33 @@
     "node",
     "bun"
   ],
-  "module": "index.js",
   "type": "module",
+  "exports": {
+    "import": "./index.js"
+  },
+  "main": "index.js",
+  "module": "index.js",
+  "types": "index.ts",
+  "workspaces": [
+    "examples"
+  ],
+  "scripts": {
+    "build": "bun build . --outdir=."
+  },
+  "dependencies": {
+    "@langchain/openai": "^0.0.34",
+    "polyfill-text-encoder-stream": "^0.0.4",
+    "zx": "^8.1.2"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "version": "1.1.0",
-  "main": "index.js",
-  "types": "index.ts",
-  "scripts": {
-    "build": "bun build . --outdir=."
+  "directories": {
+    "example": "examples"
   },
-  "workspaces": [
-    "examples"
-  ],
-  "exports": {
-    "import": "./index.js"
-  }
+  "author": "",
+  "license": "ISC"
 }
