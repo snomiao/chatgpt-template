@@ -16,7 +16,7 @@ Output: { level, notice, password }
 console.log(code);
 // const context = vm.createContext();
 const ret = new Function(
-  code + '; return passwordValidate("Rue1DHuoP2DeCP16")'
+  code + '; return passwordValidate("Rue1DHuoP2DeCP16")',
 )();
 console.log(ret);
 

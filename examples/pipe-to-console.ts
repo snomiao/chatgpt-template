@@ -23,5 +23,5 @@ Here is my input:
     write: (chunk) => {
       console.write(chunk);
     },
-  })
+  }),
 );

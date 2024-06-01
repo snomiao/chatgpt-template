@@ -1,6 +1,6 @@
 "use server";
 
-import React from 'react';
+import React from "react";
 
 type Props = {};
 
@@ -11,7 +11,10 @@ const Login: React.FC<Props> = () => {
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form method="POST" action="/login">
           <div className="mb-4">
-            <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="username">
+            <label
+              className="block mb-2 text-sm font-bold text-gray-700"
+              htmlFor="username"
+            >
               Username
             </label>
             <input
@@ -23,7 +26,10 @@ const Login: React.FC<Props> = () => {
             />
           </div>
           <div className="mb-6">
-            <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="password">
+            <label
+              className="block mb-2 text-sm font-bold text-gray-700"
+              htmlFor="password"
+            >
               Password
             </label>
             <input

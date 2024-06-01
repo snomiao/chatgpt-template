@@ -16,7 +16,7 @@ export function gpt<V extends string | undefined>(
         new TransformStream({
           transform: (chunk, ctrl) =>
             ctrl.enqueue((chunk.content as string) ?? ""),
-        })
+        }),
       )
       .pipeThrough(new TextEncoderStream())
       .pipeTo(tr.writable);

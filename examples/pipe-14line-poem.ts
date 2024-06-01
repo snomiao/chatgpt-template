@@ -6,6 +6,6 @@ console.log(
       write: (e) => {
         console.write(e);
       },
-    })
-  )
+    }),
+  ),
 );

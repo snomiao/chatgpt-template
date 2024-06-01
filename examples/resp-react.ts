@@ -22,5 +22,5 @@ await write(file(import.meta.dir + "/Login.tsx"), await resp.text());
 const html = await import(import.meta.dir + "/Login.tsx")
   .then(async (e: any) => await e.default({}))
   .then(async (e: any) => await renderToString(e));
-  
+
 console.log(html);

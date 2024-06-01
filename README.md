@@ -73,10 +73,12 @@ Output: { level, notice }
 
 console.log(code);
 const context = vm.createContext();
-const { level, notice } =  new vm.Script(code+ '; passwordValidate("Rue1DHuoP2DeCP16")').runInContext(context);
-console.log({level, notice});
-
+const { level, notice } = new vm.Script(
+  code + '; passwordValidate("Rue1DHuoP2DeCP16")',
+).runInContext(context);
+console.log({ level, notice });
 ```
+
 ### Return as Streaming Response (Next.js)
 
 ```ts
@@ -119,7 +121,7 @@ Here is my input:
     write: (content) => {
       console.write(content);
     },
-  })
+  }),
 ); // write to console
 ```
 
