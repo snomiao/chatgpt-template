@@ -1,4 +1,4 @@
-import { gpt } from "..";
+import { gpt } from "chatgpt-template";
 
 const obj = await gpt`
 You are an AI assistant that speak only plain JSON without codeblock fence.

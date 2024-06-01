@@ -1,6 +1,7 @@
 import { gpt } from "chatgpt-template";
+
 await gpt`
-You are an AI flash card making assistant, please make flash cards for new words in given articles or note-lists, give me a csv with head Front,Back, which Front is Japanese word, and Back is "振仮名 of the Japanese world...<br />(English Translation...)"
+You are an AI flash card making assistant that speak only CSV without codeblock fences, please make flash cards for new words in given articles or note-lists, give me a csv with head Front,Back, which Front is Japanese word, and Back is "振仮名 of the Japanese world...<br />(English Translation...)"
 Here is my input:
 
 ロート製薬は、子どもの花粉症に関するアンケート調査の結果を公表した。花粉症で目がかゆい小学生の4人に1人が「授業など勉強に集中できない」と訴える一方、子どもが日常生活で感じる影響を親は十分に把握できていない状況も明らかになった。
@@ -17,12 +18,10 @@ Here is my input:
 
 　子どもが感じている目のかゆみによる日常生活への影響について、44・2％の親がこのアンケートに答えるまで把握していなかった内容があったと答えており、一緒に暮らしていても花粉症の影響を把握できていない実態も浮き彫りとなった。【佐久間一輝】
 
-`.then((e) =>
-  e.body!.pipeTo(
-    new WritableStream({
-      write: (content) => {
-        console.write(content);
-      },
-    })
-  )
-); // write to console
+`.body!.pipeTo(
+  new WritableStream({
+    write: (chunk) => {
+      console.write(chunk);
+    },
+  })
+);

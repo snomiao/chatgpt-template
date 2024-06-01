@@ -1,10 +1,11 @@
 {
+  "name": "chatgpt-template",
   "dependencies": {
     "@langchain/openai": "^0.0.34",
-    "polyfill-text-encoder-stream": "^0.0.4"
+    "polyfill-text-encoder-stream": "^0.0.4",
+    "zx": "^8.1.2"
   },
   "description": "Talk to ChatGPT in JS TemplateString Style with Streaming Support",
-  "name": "chatgpt-template",
   "keywords": [
     "gpt",
     "chatgpt",
@@ -20,10 +21,13 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "version": "0.0.8",
+  "version": "1.0.0",
   "main": "index.js",
   "types": "index.ts",
   "scripts": {
     "build": "bun build . --outdir=."
-  }
+  },
+  "workspaces": [
+    "examples"
+  ]
 }
