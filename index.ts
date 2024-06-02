@@ -16,10 +16,12 @@ export function gpt<V extends string | undefined>(
         new TransformStream({
           transform: (chunk, ctrl) =>
             ctrl.enqueue((chunk.content as string) ?? ""),
-        }),
+        })
       )
       .pipeThrough(new TextEncoderStream())
       .pipeTo(tr.writable);
   })();
-  return new Response(tr.readable);
+  return new Response(tr.readable, {
+    headers: { "Content-Type": "text/html; charset=UTF-8" },
+  });
 }
