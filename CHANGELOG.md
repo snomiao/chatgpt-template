@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/snomiao/chatgpt-template/compare/v1.1.2...v1.1.3) (2024-06-02)
+
+
+### Bug Fixes
+
+* **contenttype:** as html ([aa40a68](https://github.com/snomiao/chatgpt-template/commit/aa40a68084b95110c02680e929de54acaf373386))
+
 ### [1.1.2](https://github.com/snomiao/chatgpt-template/compare/v1.1.1...v1.1.2) (2024-06-01)
 
 ### [1.1.1](https://github.com/snomiao/chatgpt-template/compare/v1.1.0...v1.1.1) (2024-06-01)
