@@ -1,27 +1,52 @@
-import { ChatOpenAI } from "@langchain/openai";
-import TextEncoderStream from "polyfill-text-encoder-stream";
-
-export function gpt<V extends string | undefined>(
-  s: TemplateStringsArray | string,
-  ...v: V[]
-) {
-  const content =
-    typeof s === "string"
-      ? s
-      : s[0] + s.slice(1).map((e, i) => (v[i] ?? "") + e);
-  const tr = new TransformStream<string, Uint8Array>();
+import OpenAI from "openai";
+import pMap from "p-map";
+import { zipWith } from "rambda";
+import { sf, sflow, snoflow, type FlowSource } from "sflow";
+import { match } from "ts-pattern";
+import { isTemplateStringArray } from "./isTemplateStringArray";
+import { isXMLHTTPRequestBodyInit } from "./isXMLHTTPRequestBodyInit";
+import { streamAsyncIterator } from "./streamAsyncIterator";
+import PolyfillTextDecoderStream from "polyfill-text-decoder-stream";
+function unpromises<T>(promise: Promise<ReadableStream<T>>): ReadableStream<T> {
+  const tr = new TransformStream<T, T>();
   (async function () {
-    (await new ChatOpenAI({ model: "gpt-4o" }).stream(content))
-      .pipeThrough(
-        new TransformStream({
-          transform: (chunk, ctrl) =>
-            ctrl.enqueue((chunk.content as string) ?? ""),
-        })
-      )
-      .pipeThrough(new TextEncoderStream())
-      .pipeTo(tr.writable);
-  })();
-  return new Response(tr.readable, {
-    headers: { "Content-Type": "text/html; charset=UTF-8" },
-  });
+    const s = await promise;
+    await s.pipeTo(tr.writable);
+  })().catch((error) =>
+    tr.readable.cancel(error).catch(() => {
+      throw error;
+    })
+  );
+  return tr.readable;
 }
+export const gpt = (
+  tsa: TemplateStringsArray,
+  ...slots: (XMLHttpRequestBodyInit | FlowSource<string>)[]
+) =>
+  sf(
+    unpromises(
+      (async () => {
+        const u = [...tsa] as string[];
+        const v = await pMap(slots ?? [], async (e) =>
+          isXMLHTTPRequestBodyInit(e)
+            ? new Response(e).text()
+            : sflow<string>(e).text()
+        );
+        const body = zipWith((a, b) => a + b, u, [...v, ""]).join("");
+        const prompt = [body].join("");
+        return sflow(
+          await new OpenAI().chat.completions
+            .create({
+              model: process.env.CHATGPT_MODEL ?? "gpt-4o",
+              messages: [{ content: `${prompt}`, role: "user" }],
+              stream: true,
+            })
+            .then((e) => e.toReadableStream())
+        )
+          .through(new PolyfillTextDecoderStream())
+          .map(
+            (e) => (JSON.parse(e)?.choices?.[0]?.delta?.content as string) ?? ""
+          );
+      })()
+    )
+  );

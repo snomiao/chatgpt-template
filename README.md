@@ -11,7 +11,7 @@ Talk to ChatGPT in JS TemplateString Style with Streaming Support
 
 ```ts
 import { gpt } from "chatgpt-template";
-console.log(await gpt`Hello, world`.text()); // greetings
+console.log(await gpt`Hello, world`); // greetings
 ```
 
 ### Get json:
@@ -124,6 +124,23 @@ Here is my input:
   }),
 ); // write to console
 ```
+
+## API v2 Design
+
+```ts
+gpt`...` => resposne...
+
+type gptResponse = ReadableStream<string> & {
+  [Symbol.AsyncIterable]: ..., // token stream,
+  readable:
+  writalbe: // fill to template blanks
+  response: new response
+  text:  ()=>Promise< string>,
+  json:  ()=>Promise< any>,
+  then: ()=>Promise< string>,
+  catch: ()=>Promise<...>, // network error
+}
+type gpt = (tsa: tsa, slots: srcs)=>gptResponse
 
 ### More [./examples HERE](./examples)
 
