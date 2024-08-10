@@ -1,8 +1,5 @@
-import vm from "vm";
+import { file, write } from "bun";
 import { gpt } from "chatgpt-template";
-import { $, file, write } from "bun";
-import { tempfile } from "zx";
-import React from "react";
 import { renderToString } from "react-dom/server";
 const resp = gpt`
 You are an AI assistant that speak only TypeScript (*.tsx) without codeblock fence.

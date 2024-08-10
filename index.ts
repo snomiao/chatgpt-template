@@ -1,12 +1,9 @@
 import OpenAI from "openai";
 import pMap from "p-map";
-import { zipWith } from "rambda";
-import { sf, sflow, snoflow, type FlowSource } from "sflow";
-import { match } from "ts-pattern";
-import { isTemplateStringArray } from "./isTemplateStringArray";
-import { isXMLHTTPRequestBodyInit } from "./isXMLHTTPRequestBodyInit";
-import { streamAsyncIterator } from "./streamAsyncIterator";
 import PolyfillTextDecoderStream from "polyfill-text-decoder-stream";
+import { zipWith } from "rambda";
+import { sf, type FlowSource } from "sflow";
+import { isXMLHTTPRequestBodyInit } from "./isXMLHTTPRequestBodyInit";
 function unpromises<T>(promise: Promise<ReadableStream<T>>): ReadableStream<T> {
   const tr = new TransformStream<T, T>();
   (async function () {
@@ -30,11 +27,11 @@ export const gpt = (
         const v = await pMap(slots ?? [], async (e) =>
           isXMLHTTPRequestBodyInit(e)
             ? new Response(e).text()
-            : sflow<string>(e).text()
+            : sf<string>(e).text()
         );
         const body = zipWith((a, b) => a + b, u, [...v, ""]).join("");
         const prompt = [body].join("");
-        return sflow(
+        return sf(
           await new OpenAI().chat.completions
             .create({
               model: process.env.CHATGPT_MODEL ?? "gpt-4o",
