@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-template",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Talk to ChatGPT in JS TemplateString Style with Streaming Support",
   "keywords": [
     "gpt",
