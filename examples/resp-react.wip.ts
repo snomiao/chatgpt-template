@@ -13,11 +13,19 @@ Submit Action: POST /login {username, password }
 
 `;
 
-await write(file(import.meta.dir + "/Login.tsx"), await resp.text());
-// await $`bun build ${import.meta.dir+"./Login.tsx"} --outdir ${import.meta.dir}`;
-// console.log(code);
-const html = await import(import.meta.dir + "/Login.tsx")
-  .then(async (e: any) => await e.default({}))
-  .then(async (e: any) => await renderToString(e));
+const f = import.meta.dir + "/Login.tsx";
+const code = await resp.text();
+console.log("--- react code");
+console.log(code);
+await write(file(f), code);
 
+const html = await import(import.meta.dir + "/Login.tsx")
+  .then((e: any) => e.default)
+  .then(async (Component) => await Component({}))
+  .then((element) => renderToString(element));
+console.log("--- render result");
 console.log(html);
+console.log("--- preview link");
+console.log(`data:text/html,${encodeURIComponent(html)}`);
+await Bun.$`rm -f ${f}`;
+console.log("--- done");

@@ -1,16 +1,11 @@
-import type { Ord } from "rambda";
-import { WritableConsole } from "writable-console";
-import { gpt } from "..";
-import { fromWritable } from "sflow/fromNodeStream";
-import { lines } from "sflow";
-import { file } from "bun";
 import "d3";
-import { csvParse, csvParseRows } from "d3";
+import { csvParse } from "d3";
+import { gpt } from "../index";
 
 it("streams csv", async () => {
   const out =
     await gpt`Act as a speak only CSV without comments, give me a 3*3 multiplication table, start with header\nexpr,answer\n1*1,1`
-      .through(lines())
+      .lines({ EOL: "NONE" })
       // .log((e) => console.log(e)) // csv
       .tees((s) =>
         s

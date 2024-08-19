@@ -1,9 +1,7 @@
-import { chalk } from "zx";
-import { gpt } from "..";
-import { WritableConsole } from "writable-console";
-import TextDecoderStream from "polyfill-text-decoder-stream";
 import { maps } from "snoflow";
 import { fromWritable } from "snoflow/fromNodeStream";
+import { chalk } from "zx";
+import { gpt } from "..";
 
 it("work with nest", async () => {
   const password = "jUzHaoLWQUYvHwzR";
@@ -39,4 +37,4 @@ Dont explain, just answer
   console.log("\n\n");
   const answer = await new Response(scanner).text();
   expect(answer.includes(password)).toBe(true);
-}, 10e3); // 1min timeout
+}, 15e3); // 15s timeout
