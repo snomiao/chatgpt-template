@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-template",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Talk to ChatGPT in JS TemplateString Style with Streaming Support",
   "keywords": [
     "gpt",
@@ -10,14 +10,14 @@
     "bun"
   ],
   "license": "ISC",
-  "author": "",
+  "author": "snomiao@gmail.com",
   "type": "module",
   "exports": {
-    "import": "./index.js",
+    "import": "./dist/index.js",
     "types": "./index.ts"
   },
-  "main": "index.js",
-  "module": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "index.ts",
   "directories": {
     "example": "examples"
@@ -30,7 +30,7 @@
     "examples"
   ],
   "scripts": {
-    "build": "bun build . --outdir=.",
+    "build": "bun build ./index.ts --outdir=dist",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test"
