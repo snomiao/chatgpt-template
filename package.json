@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-template",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Talk to ChatGPT in JS TemplateString Style with Streaming Support",
   "keywords": [
     "gpt",
@@ -44,7 +44,7 @@
     "polyfill-text-decoder-stream": "^0.0.7",
     "polyfill-text-encoder-stream": "^0.0.4",
     "rambda": "^9.2.0",
-    "sflow": "^1.11.0",
+    "sflow": "^1.16.17",
     "snoflow": "^1.9.1",
     "ts-pattern": "^5.2.0",
     "writable-console": "^0.0.2",
