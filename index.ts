@@ -7,6 +7,7 @@ import { isXMLHTTPRequestBodyInit } from "./isXMLHTTPRequestBodyInit";
 export const gptEnv: Record<string, string> = {
   // OPENAI_API_KEY: "",
   // OPENAI_CHAT_MODEL
+  
 };
 
 export const gpt = (
@@ -27,9 +28,13 @@ export const gpt = (
       const body = zipWith((a, b) => a + b, u, [...v, ""]).join("");
       const prompt = [body].join("");
       return sf(
-        await new OpenAI().chat.completions
+        await new OpenAI({
+          // todo: use api key from gptenv
+        }).chat.completions
           .create({
-            model: process.env.OPENAI_CHATGPT_MODEL ?? "gpt-4o",
+            model: 
+            // todo: use model from enve
+            process.env.OPENAI_CHATGPT_MODEL ?? "gpt-4o",
             messages: [{ content: `${prompt}`, role: "user" }],
             stream: true,
           })
