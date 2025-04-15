@@ -1,10 +1,16 @@
-# GPT Template
+# ChatGPT Template
 
 Talk to ChatGPT in JS TemplateString Style with Streaming Support
 
 ## Get Started
 
 1. Setup your env.OPENAI_API_KEY into your .env file
+
+```dotenv
+OPENAI_API_KEY=....
+OPENAI_CHAT_MODEL=gpt-4o
+```
+
 2. Try following code:
 
 ### Get full text once:

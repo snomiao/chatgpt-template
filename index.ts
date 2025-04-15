@@ -6,6 +6,7 @@ import { sf, type FlowSource } from "sflow";
 import { isXMLHTTPRequestBodyInit } from "./isXMLHTTPRequestBodyInit";
 export const gptEnv: Record<string, string> = {
   // OPENAI_API_KEY: "",
+  // OPENAI_CHAT_MODEL
 };
 
 export const gpt = (
@@ -28,7 +29,7 @@ export const gpt = (
       return sf(
         await new OpenAI().chat.completions
           .create({
-            model: process.env.CHATGPT_MODEL ?? "gpt-4o",
+            model: process.env.OPENAI_CHATGPT_MODEL ?? "gpt-4o",
             messages: [{ content: `${prompt}`, role: "user" }],
             stream: true,
           })
